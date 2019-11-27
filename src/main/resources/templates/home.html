@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:sec="http://www.w3.org/1999/xhtml" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Subscription Manager</title>
+</head>
+<body>
+<h2>Welcome to home page!</h2>
+<span sec:authentication="principal.username">User</span>
+
+<form action="#" th:action="@{/home/save}" th:object="${form}"
+      method="post">
+    <fieldset>
+        <input type="submit" id="submitButton" th:value="Save">
+        <table>
+            <thead>
+            <tr>
+                <th> Username </th>
+                <th> Youtube_Access </th>
+                <th> Instagram_Access </th>
+                <th> VK_Access </th>
+                <th> Facebook_Access </th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="user, itemStat : *{}">
+                <td><input th:field="*{books[__${itemStat.index}__].title}" /></td>
+                <td><input th:field="*{books[__${itemStat.index}__].author}" /></td>
+
+            </tr>
+            </tbody>
+        </table>
+    </fieldset>
+</form>
+
+<br>
+<p> <a th:href="@{/logout}"> Log Out </a> </p>
+
+</body>
+</html>
