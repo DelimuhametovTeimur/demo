@@ -76,7 +76,7 @@ public class User {
 
     public static enum AccesService implements GrantedAuthority{
 
-        Perimited, Denied;
+        Permited, Denied;
 
         @Override
         public String getAuthority() {

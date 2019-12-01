@@ -1,19 +1,15 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:sec="http://www.w3.org/1999/xhtml" xmlns:th="http://www.w3.org/1999/xhtml">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
     <meta charset="UTF-8">
     <title>Subscription Manager</title>
 </head>
 <body>
-<h2>Welcome to home page!</h2>
-<span sec:authentication="principal.username">User</span>
+<h2>Welcome to home page <span sec:authentication="principal.username">User</span> ! </h2>
 
-<form action="#" th:action="@{/home/save}" th:object="${form}"
-      method="post">
-    <fieldset>
-        <input type="submit" id="submitButton" th:value="Save">
-        <table>
-            <thead>
+<form method="POST" th:action="@{/home}" id="showUsers">
+        <table border = "1">
             <tr>
                 <th> Username </th>
                 <th> Youtube_Access </th>
@@ -21,16 +17,18 @@
                 <th> VK_Access </th>
                 <th> Facebook_Access </th>
             </tr>
-            </thead>
-            <tbody>
-            <tr th:each="user, itemStat : *{}">
-                <td><input th:field="*{books[__${itemStat.index}__].title}" /></td>
-                <td><input th:field="*{books[__${itemStat.index}__].author}" /></td>
 
+            <tr th:each = "user : ${users}">
+                <td> <input type="text" name="username" readonly th:value = "${user.username}"> </td>
+                <td> <input type = "checkbox" name = "YoutubeAccess" th:checked = "${#strings.equals(user.youtube, 'Permited')}"> </td>
+                <td> <input type = "checkbox" name = "InstagramAccess" th:checked = "${#strings.equals(user.instagram, 'Permited')}"> </td>
+                <td> <input type = "checkbox" name = "VKAccess" th:checked = "${#strings.equals(user.vk, 'Permited')}"> </td>
+                <td> <input type = "checkbox" name = "FacebookAccess" th:checked = "${#strings.equals(user.facebook, 'Permited')}"> </td>
             </tr>
-            </tbody>
+
         </table>
-    </fieldset>
+
+    <input type="submit" value="Save">
 </form>
 
 <br>
