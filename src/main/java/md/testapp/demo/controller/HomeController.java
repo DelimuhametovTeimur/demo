@@ -38,6 +38,7 @@ public class HomeController {
 
         Optional<User> newUser = userRepository.findByUsername(username);
 
+
         model.addAttribute("users", userRepository.findAll());
 
         return "home";
