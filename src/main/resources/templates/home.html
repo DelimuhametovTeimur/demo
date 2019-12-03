@@ -8,7 +8,6 @@
 <body>
 <h2>Welcome to home page <span sec:authentication="principal.username">User</span> ! </h2>
 
-<form method="POST" th:action="@{/home}" id="showUsers">
         <table border = "1">
             <tr>
                 <th> Username </th>
@@ -16,20 +15,24 @@
                 <th> Instagram_Access </th>
                 <th> VK_Access </th>
                 <th> Facebook_Access </th>
+                <th> Edit </th>
             </tr>
 
             <tr th:each = "user : ${users}">
-                <td> <input type="text" name="username" readonly th:value = "${user.username}"> </td>
-                <td> <input type = "checkbox" name = "YoutubeAccess" th:checked = "${#strings.equals(user.youtube, 'Permited')}"> </td>
-                <td> <input type = "checkbox" name = "InstagramAccess" th:checked = "${#strings.equals(user.instagram, 'Permited')}"> </td>
-                <td> <input type = "checkbox" name = "VKAccess" th:checked = "${#strings.equals(user.vk, 'Permited')}"> </td>
-                <td> <input type = "checkbox" name = "FacebookAccess" th:checked = "${#strings.equals(user.facebook, 'Permited')}"> </td>
+                <form action="#" method="POST" th:action="@{/home}" id="saveChanges" th:object="${user}" >
+                    <td> <input type="text" name="username"  readonly th:value = "${user.username}"> </td>
+                    <td> <input type = "checkbox" th:value="Permitted" name = "youtubeAccess" th:checked = "${#strings.equals(user.youtube, 'Permitted')}"> </td>
+                    <td> <input type = "checkbox" th:value="Permitted" name = "instagramAccess" th:checked = "${#strings.equals(user.instagram, 'Permitted')}"> </td>
+                    <td> <input type = "checkbox" th:value="Permitted" name = "vkAccess" th:checked = "${#strings.equals(user.vk, 'Permitted')}"> </td>
+                    <td> <input type = "checkbox" th:value="Permitted" name = "facebookAccess" th:checked = "${#strings.equals(user.facebook, 'Permitted')}"> </td>
+                    <td> <input type="submit" value="Save"> </td>
+                </form>
             </tr>
 
         </table>
 
-    <input type="submit" value="Save">
-</form>
+
+<div th:name="${userIns}"> Hey </div>
 
 <br>
 <p> <a th:href="@{/logout}"> Log Out </a> </p>

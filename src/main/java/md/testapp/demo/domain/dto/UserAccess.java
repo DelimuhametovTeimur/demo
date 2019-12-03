@@ -1,30 +1,31 @@
 package md.testapp.demo.domain.dto;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
-
-import javax.validation.constraints.NotBlank;
+import lombok.NoArgsConstructor;
 
 @Data
-@AllArgsConstructor
+@NoArgsConstructor
 public class UserAccess {
 
-    @NotBlank
+
     private String username;
 
-    @NotBlank
-    private boolean YoutubeAccess;
+    private String youtubeAccess;
 
-    @NotBlank
-    private boolean InstagramAccess;
+    private String instagramAccess;
 
-    @NotBlank
-    private boolean VkAccess;
+    private String vkAccess;
 
-    @NotBlank
-    private boolean FacebookAccess;
+    private String facebookAccess;
 
-
+    public UserAccess (String username, String youtubeAccess, String instagramAccess, String vkAccess, String facebookAccess)
+    {
+        this.username = username;
+        this.youtubeAccess = (youtubeAccess.isEmpty()) ? "Denied" : "Permitted";
+        this.instagramAccess = (instagramAccess.isEmpty()) ? "Denied" : "Permitted";
+        this.vkAccess = (vkAccess.isEmpty()) ? "Denied" : "Permitted";
+        this.facebookAccess = (facebookAccess.isEmpty()) ? "Denied" : "Permitted";
+    }
 
 
 }
